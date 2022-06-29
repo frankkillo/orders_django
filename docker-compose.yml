@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/orders_django_docker
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+      - redis
+  celery:
+    build: .
+    command: celery -A orders_django worker -l INFO
+    volumes:
+      - .:/orders_django_docker
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - web
+      - redis
+  celery-beat:
+    build: .
+    command: celery -A orders_django beat -l INFO
+    volumes:
+      - .:/orders_django_docker
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - web
+      - redis
+  redis:
+    image: "redis:alpine"
+    command: redis-server
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      - ./data/db:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=user001
+      - POSTGRES_PASSWORD=123456789
+      - POSTGRES_DB=test_sheets
+volumes:
+  postgres_data:

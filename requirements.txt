@@ -1,0 +1,7 @@
+gspread
+django
+psycopg2-binary==2.9.1
+djangorestframework
+celery
+redis
+requests
