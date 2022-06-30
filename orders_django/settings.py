@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_celery_results',
     'product',
 ]
 
@@ -127,10 +128,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#SERVICE_ACCOUNT = 'product/service_account.json'
-
-CELERY_BROKER_URL = "redis://redis:6379"
-CELERY_RESULT_BACKEND = "redis://redis:6379"
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", 'redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", 'django-db')
 
 CELERY_BEAT_SCHEDULE = {
       'add-every-30-seconds': {
@@ -151,6 +150,12 @@ SERVICE_ACCOUNT = {
     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
     "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/account%40testsheet-354509.iam.gserviceaccount.com"
 }
+
+REST_FRAMEWORK = {
+        "DEFAULT_PAGINATION_CLASS":
+        "rest_framework.pagination.PageNumberPagination",
+        "PAGE_SIZE": 40,
+    }
 
 TELEGRAM_BOT_URL = ""
 TELEGRAM_CHAT_ID = ""

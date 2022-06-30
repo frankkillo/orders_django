@@ -9,7 +9,7 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - ./.env.dev
+      - ./.docker_env.dev
     depends_on:
       - db
       - redis
@@ -19,7 +19,7 @@ services:
     volumes:
       - .:/orders_django_docker
     env_file:
-      - ./.env.dev
+      - ./.docker_env.dev
     depends_on:
       - web
       - redis
@@ -29,7 +29,7 @@ services:
     volumes:
       - .:/orders_django_docker
     env_file:
-      - ./.env.dev
+      - ./.docker_env.dev
     depends_on:
       - web
       - redis
