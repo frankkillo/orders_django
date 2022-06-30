@@ -1,4 +1,5 @@
-# orders_django
+# orders_django [ссылку на Google Sheets документ](https://docs.google.com/spreadsheets/d/1vS9jEfk2Zz4LpR7mLKp2RtOmRaw1dWWZn1fpdUozdA0/edit#gid=0)
+## Фрон-енд: https://github.com/frankkillo/orders_django.git
 ### Тестовая работа, для работы с таблицами Google Sheets. Для запуска приложения есть два способа:
 1. Docker
 2. Ручной запуск
