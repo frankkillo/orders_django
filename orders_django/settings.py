@@ -27,8 +27,8 @@ SECRET_KEY = "django-insecure-lnnsidc($p&z5*tn57i+_#jbp(34tl+an55h%n#cii0n1v35j3
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-# Application definition
 
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'django_celery_results',
     'product',
 ]
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -138,6 +140,12 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 
+CORS_ALLOWED_ORIGINS = [
+    "http://192.168.0.19:8081",
+    "http://localhost:8081",
+    "http://127.0.0.1:8081",
+]
+
 SERVICE_ACCOUNT = {
     "type": "service_account",
     "project_id": "testsheet-354509",
@@ -152,10 +160,10 @@ SERVICE_ACCOUNT = {
 }
 
 REST_FRAMEWORK = {
-        "DEFAULT_PAGINATION_CLASS":
-        "rest_framework.pagination.PageNumberPagination",
-        "PAGE_SIZE": 40,
-    }
+    "DEFAULT_PAGINATION_CLASS":
+    "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 40,
+}
 
 TELEGRAM_BOT_URL = ""
 TELEGRAM_CHAT_ID = ""
