@@ -144,6 +144,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://192.168.0.19:8081",
     "http://localhost:8081",
     "http://127.0.0.1:8081",
+    "http://172.17.0.2:8080",
+    "http://localhost:8080",
 ]
 
 SERVICE_ACCOUNT = {

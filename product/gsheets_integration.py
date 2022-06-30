@@ -12,12 +12,14 @@ def create_update_delete_product():
 
     for product in gsheet_client.records():
         obj, created = Product.objects.update_or_create(
-            pk=product.id,
-            order_id=product.order_id,
-            usd_price=product.usd_price,
-            rub_price=product.rub_price,
-            expiration=product.expiration
+            id=product.id, defaults={
+                'order_id':product.order_id,
+                'usd_price':product.usd_price,
+                'rub_price':product.rub_price,
+                'expiration':product.expiration
+            }
         )
+
         products_set.add(product.id)
 
     all_products_set = set(i[0] for i in Product.objects.values_list('id'))
